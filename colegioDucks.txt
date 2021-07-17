@@ -1,0 +1,61 @@
+
+
+helper.js
+
+import { db } from "../../firebase/firebase-config";
+
+constantes
+
+   const initialState = {
+      colegios: []
+   }
+
+
+
+// types
+
+const ADD_COLEGIO    = 'ADD_COLEGIO';
+const UPDATE_COLEGIO = 'UPDATE_COLEGIO';
+const DELETE_COLEGIO = 'DELETE_COLEGIO';
+const LIST_COLEGIOS  = 'LIST_COLEGIOS';
+
+
+
+// reducers
+
+export default colegioReducr(state = initialState, accion){
+  switch(action.type){
+     case LIST_COLEGIOS :
+        return {...state, colegios : action.payload}
+   
+     default :
+        return state;
+  }
+}
+
+
+
+
+// acciones
+
+export const listarColegiosAccion = () => async (dispatch, getState) => {
+   const colegios = [];
+   try{
+     const colegiosSnap = await db.collection(`${uid}/colegiodb/colegios`).get();
+
+    colegiosSnap.forEach((datos) => {
+    	colegios.push({
+		...datos.data()
+	});
+     });
+
+     dispatch({
+       type:LIST_COLEGIOS,
+       payload: colegios
+     });
+   }
+   catch(error){
+	console.log(error);
+   }
+}
+

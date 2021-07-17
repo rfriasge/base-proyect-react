@@ -1,0 +1,10 @@
+/*#anoEscolarDlg .p-dialog-content{
+	height:400px !important;
+}*/
+.p-dialog-content{
+	overflow:visible !important;
+}
+
+
+
+/*style="z-index: 1031; transform-origin: center top; top: 35px; left: 0px;"*/
